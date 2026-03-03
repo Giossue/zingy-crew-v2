@@ -47,7 +47,7 @@ export function RegisterWizard() {
     return (
         <div className="flex flex-col gap-5">
             {/* Progress */}
-            <div className="flex items-center justify-between text-xs text-white/50">
+            <div className="flex items-center justify-between text-sm text-white/50">
                 <span>Paso {step} de 5</span>
                 <span>{STEP_TITLES[step - 1]}</span>
             </div>
@@ -58,30 +58,35 @@ export function RegisterWizard() {
                 />
             </div>
 
-            {/* Step Content */}
-            {step === 1 && <StepUsername form={form} set={set} />}
-            {step === 2 && <StepContact form={form} set={set} />}
-            {step === 3 && <StepSecurity form={form} set={set} />}
-            {step === 4 && <StepPreferences form={form} set={set} />}
-            {step === 5 && <StepOtp form={form} set={set} />}
+            {/* Step Content — min height prevents layout shift */}
+            <div className="min-h-[120px]">
+                {step === 1 && <StepUsername form={form} set={set} />}
+                {step === 2 && <StepContact form={form} set={set} />}
+                {step === 3 && <StepSecurity form={form} set={set} />}
+                {step === 4 && <StepPreferences form={form} set={set} />}
+                {step === 5 && <StepOtp form={form} set={set} />}
+            </div>
 
-            {/* Navigation */}
-            <div className="flex gap-3">
+            {/* Navigation — stacked on mobile, row on sm+ */}
+            <div className="flex w-full flex-col-reverse gap-3 sm:flex-row">
                 {step > 1 && (
-                    <Button variant="flat" onPress={back} isDisabled={isPending}
+                    <Button variant="flat" size="lg" className="w-full sm:w-auto"
+                        onPress={back} isDisabled={isPending}
                         startContent={<ArrowLeft size={16} />}
                     >
                         Atrás
                     </Button>
                 )}
                 {step < 5 ? (
-                    <Button color="primary" className="ml-auto font-semibold" onPress={next}
-                        endContent={<ArrowRight size={16} />}
+                    <Button color="primary" size="lg"
+                        className="w-full font-semibold sm:ml-auto sm:w-auto"
+                        onPress={next} endContent={<ArrowRight size={16} />}
                     >
                         Siguiente
                     </Button>
                 ) : (
-                    <Button color="success" className="ml-auto font-semibold"
+                    <Button color="success" size="lg"
+                        className="w-full font-semibold sm:ml-auto sm:w-auto"
                         onPress={handleSubmit} isLoading={isPending}
                         startContent={!isPending ? <Sparkles size={16} /> : undefined}
                     >

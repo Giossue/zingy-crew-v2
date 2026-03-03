@@ -38,6 +38,7 @@ export function ClientLoginForm() {
                 placeholder="tu@correo.com o tu_usuario"
                 startContent={<User size={18} className="text-default-400" />}
                 variant="bordered"
+                size="lg"
                 isRequired
                 autoComplete="username"
                 isDisabled={isPending}
@@ -51,6 +52,7 @@ export function ClientLoginForm() {
                 placeholder="••••••••"
                 startContent={<Lock size={18} className="text-default-400" />}
                 variant="bordered"
+                size="lg"
                 isRequired
                 autoComplete="current-password"
                 isDisabled={isPending}
